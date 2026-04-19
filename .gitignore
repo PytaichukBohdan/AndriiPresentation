@@ -50,6 +50,12 @@ Thumbs.db
 public/cutouts/*.png
 public/backgrounds/*.jpg
 
+# Browser-validator artifacts
+screenshots/
+
+# Claude scheduled task lock
+.claude/scheduled_tasks.lock
+
 # TypeScript
 *.tsbuildinfo
 

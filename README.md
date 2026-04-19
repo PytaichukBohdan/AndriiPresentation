@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# BOYS TRIP 2026 — Neo-Brutalist React Proposal Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Презентация-сайт на 13 направлений в Средиземноморье для 9 пацанов. Neo-Brutalist стиль (Disruptor), пацанский тон, голосование, реакции, коллажи с вырезанными пацанами на процедурных фонах.
 
-Currently, two official plugins are available:
+## Стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript + Vite 8 + Tailwind 3 + shadcn/ui
+- framer-motion для slam-анимаций
+- sharp + @imgly/background-removal-node для генерации коллажей
+- zod для валидации импорта реакций
+- pnpm (через локальный `artifacts-builder` skill)
 
-## React Compiler
+## Запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+pnpm run dev           # http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Генерация коллажей
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Изображения генерируются один раз перед первым запуском. Коммитятся в `public/generated/`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm run prep:cutouts      # 11 boys → public/cutouts/*.png (background removal)
+pnpm run prep:bg           # 53 procedural brutalist backgrounds → public/backgrounds/*.jpg
+pnpm run comp:scenes       # 53 collages → public/generated/*.jpg + manifest.json
+pnpm run gen:images        # все шаги сразу
+pnpm run gen:images:force  # перегенерация с нуля
 ```
+
+## Сборка
+
+```bash
+pnpm run build             # dist/ — production бандл
+pnpm run preview           # проверка prod билда
+pnpm run lint              # eslint
+```
+
+## Bundle (single-file HTML артефакт)
+
+```bash
+pnpm run bundle            # через artifacts-builder skill
+```
+
+## Структура
+
+```
+src/
+  components/              # все слайды (default export каждый)
+    DestinationCard/       # подкомпоненты карточки направления
+    ui/                    # shadcn/ui (40+, не трогаем)
+  context/                 # VoteContext, ReactionsContext, UiContext
+  data/                    # destinations, boys, sceneSpecs, backgroundSpecs, reactionsSchema
+  hooks/                   # useSectionObserver, useCursor
+  types/                   # TypeScript interfaces
+scripts/                   # prepare-cutouts, prepare-backgrounds, composite-scenes, gen-all
+public/
+  boys/                    # исходные JPG (11 штук, короткие имена)
+  cutouts/                 # PNG с прозрачным фоном (background removal)
+  backgrounds/             # процедурные brutalist фоны (SVG → JPG через Sharp)
+  generated/               # финальные коллажи + manifest.json
+```
+
+## Реакции — как шарить
+
+1. Один пацан — владелец bundle.html. Рассылает всем.
+2. Каждый выбирает себя в `NicknamePicker`, оставляет реакции на каждом направлении.
+3. Каждый жмёт «СКАЧАТЬ РЕАКЦИИ» → получает `reactions-<date>.json`.
+4. Владелец импортирует все присланные файлы через «ЗАЛИТЬ РЕАКЦИИ». Дубли отбрасываются по `id`.
+
+## No fallback policy
+
+Отсутствие обязательного поля → crash с понятным сообщением. Никаких silent defaults.
