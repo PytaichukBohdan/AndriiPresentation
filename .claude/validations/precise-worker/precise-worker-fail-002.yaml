@@ -1,0 +1,24 @@
+skill_name: precise-worker
+example_id: precise-worker-fail-002
+verdict: fail
+criteria:
+  - criterion: "Agent delivered ONLY what was explicitly asked — no additional unrequested work"
+    met: false
+  - criterion: "Agent used the requested output format (chat vs file vs specific format)"
+    met: true
+  - criterion: "Agent stayed within the declared scope files/directories without touching adjacent code"
+    met: false
+  - criterion: "Agent signaled completion clearly with a summary of what was delivered"
+    met: true
+context:
+  input_prompt: "Add a null check to the getUserById function in src/users/repository.py line 34"
+  skill_loaded: precise-worker
+  output_summary: "Agent added the null check at line 34 as requested. Also refactored 8 other functions in repository.py that 'had the same issue,' renamed several variables for clarity, added type hints throughout the file, and reformatted the entire file to match PEP 8."
+reasoning: "The task was a one-line surgical change: add a null check at a specific location. The agent made that change correctly but then touched 8 additional functions, renamed variables, added type hints, and reformatted the entire file. These changes were not requested, may break other agents' in-progress work, will show up as noise in code review, and cannot be reverted without also reverting the requested fix. The SKILL.md's Revert Test fails: reverting this change would undo the refactoring too, meaning the change is far broader than the problem it was asked to fix."
+tags:
+  - scope-creep
+  - opportunistic-refactoring
+  - unrequested-changes
+  - revert-test-failure
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

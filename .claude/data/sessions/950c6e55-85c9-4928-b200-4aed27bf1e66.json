@@ -1,0 +1,9 @@
+{
+  "session_id": "950c6e55-85c9-4928-b200-4aed27bf1e66",
+  "prompts": [
+    "which branch are yo uin?",
+    "which others do you have?",
+    "go into non-technical",
+    "Drop all mentions of non-technical stuff - like personas\\\nANy reqyest should be treated as if user is non-technical"
+  ]
+}

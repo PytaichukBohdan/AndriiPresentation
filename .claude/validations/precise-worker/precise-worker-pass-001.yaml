@@ -1,0 +1,24 @@
+skill_name: precise-worker
+example_id: precise-worker-pass-001
+verdict: pass
+criteria:
+  - criterion: "Agent delivered ONLY what was explicitly asked — no additional unrequested work"
+    met: true
+  - criterion: "Agent used the requested output format (chat vs file vs specific format)"
+    met: true
+  - criterion: "Agent stayed within the declared scope files/directories without touching adjacent code"
+    met: true
+  - criterion: "Agent signaled completion clearly with a summary of what was delivered"
+    met: true
+context:
+  input_prompt: "Analyze the auth module for security issues. Give me your findings in chat."
+  skill_loaded: precise-worker
+  output_summary: "Agent read auth/ directory (4 files), listed 3 specific vulnerabilities with file names and line numbers, delivered findings as a 6-sentence chat response. Did not rewrite the module, did not open unrelated files, did not create a report file."
+reasoning: "The agent matched the task exactly: analysis only, in chat, referencing line numbers. It read exactly the files in scope (auth/) and no others. The output format was chat text, not a file. It did not 'fix' the vulnerabilities it found — it reported them as asked. Completion was signaled with 'Here are the findings' and a clear list. This is the SKILL.md's explicit GOOD example pattern."
+tags:
+  - surgical
+  - format-matched
+  - no-scope-creep
+  - clear-completion-signal
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

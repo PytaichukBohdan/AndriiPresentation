@@ -1,0 +1,7 @@
+{
+  "session_id": "f8ce2140-10b9-4209-9a4d-a10e944eacce",
+  "prompts": [
+    "/plan_w_team Based on '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/specs/openclaw-harness-improvements.md' i've implemented harness\\\n\\\nBUT \\\nI also like this one \\\nhttps://github.com/qwibitai/nanoclaw\\\n\\\nPlease check if there's anything from this repository we can add and format better. The things I do not care about are containerization. What I love is the polling loop, so please preserve using Claude code. Look at the polling loop that the new thing has; maybe there is an easier way to integrate WhatsApp and Telegram. Look for maybe isolated group context, but not in a container and scheduled tasks. Show web access, and as for development, please use my existing system.",
+    "can drop whatsapp "
+  ]
+}

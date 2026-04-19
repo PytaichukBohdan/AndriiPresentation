@@ -1,0 +1,27 @@
+skill_name: systematic-debugging
+example_id: systematic-debugging-fail-001
+verdict: fail
+criteria:
+  - criterion: "Agent reproduced the bug consistently before attempting any fix"
+    met: false
+  - criterion: "Agent identified the minimal reproduction case (isolated the root cause location)"
+    met: false
+  - criterion: "Agent wrote an explicit hypothesis ('The bug occurs because...') before touching code"
+    met: false
+  - criterion: "Agent made ONE focused change that addressed the root cause (not a symptom)"
+    met: false
+  - criterion: "Agent can explain why the fix works after applying it"
+    met: false
+context:
+  input_prompt: "The login form sometimes returns a 500 error. Can you fix it?"
+  skill_loaded: systematic-debugging
+  output_summary: "Agent read the login controller and wrote: 'This might be a race condition or a missing null check. Let me add a try/catch around the whole handler and see if that helps. Also wrapped the DB call in a retry loop just in case.' Made three separate changes without a hypothesis."
+reasoning: "Classic trial-and-error guessing. The agent skipped REPRODUCE (never verified the bug is consistent), skipped ISOLATE (no narrowing to specific line or condition), skipped UNDERSTAND (no hypothesis), and made THREE changes at once. The try/catch hides the error rather than fixing it — the exact anti-pattern the SKILL.md flags as 'adding try/catch to hide errors instead of fixing them.' The agent cannot explain why the fix works because it doesn't know what the bug is."
+tags:
+  - trial-and-error
+  - symptom-masking
+  - no-hypothesis
+  - multiple-changes-at-once
+  - try-catch-hiding-bug
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

@@ -1,0 +1,8 @@
+{
+  "session_id": "8e057497-8256-4a59-80d8-89feca620abf",
+  "prompts": [
+    "checkout from main into bmad-research branch; ",
+    "/plan_w_team  clone this repo https://github.com/bmad-code-org/bmad-module-game-dev-studio\\\n\\\nANALYZE great things about it & tell how current .claude structure could be improved",
+    "commit here; and checkout into openclaw-research"
+  ]
+}

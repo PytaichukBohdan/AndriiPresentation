@@ -1,0 +1,10 @@
+{
+  "session_id": "1c91191a-17d2-46e5-8f9e-648e7a7d03dc",
+  "prompts": [
+    "to settings add this '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/settings.json' {\n  \"effortLevel\": \"high\",\n  \"env\": {\n    \"CLAUDE_CODE_DISABLE_1M_CONTEXT\": \"1\",\n    \"CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING\": \"1\",\n    \"CLAUDE_CODE_DISABLE_AUTO_MEMORY\": \"1\",\n    \"CLAUDE_CODE_SUBAGENT_MODEL\": \"sonnet\"\n  }\n}",
+    "Also - how would you improve deny permissions? Propose only",
+    "What if I really need someytimes to explicitely do it? But on hook level it gets blocked?",
+    "Yes - build this guard hook",
+    "commit this change"
+  ]
+}

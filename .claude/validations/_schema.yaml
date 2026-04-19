@@ -1,0 +1,69 @@
+# Validation Example Schema v1.0
+# All validation examples in .claude/validations/<skill-name>/ must conform to this schema.
+# Each example is a standalone YAML file capturing a single pass/fail evaluation.
+
+version: "1.0"
+
+fields:
+  skill_name:
+    type: string
+    required: true
+    description: "Kebab-case skill name matching .claude/skills/<name>/"
+
+  example_id:
+    type: string
+    required: true
+    description: "Unique ID format: <skill>-<pass|fail>-<sequential-number> (e.g., verification-before-completion-pass-001)"
+
+  verdict:
+    type: enum
+    values: [pass, fail]
+    required: true
+    description: "Binary pass/fail — no middle ground, no partial credit"
+
+  criteria:
+    type: list
+    required: true
+    description: "List of specific, observable, binary criteria this example demonstrates"
+    items:
+      criterion:
+        type: string
+        description: "One specific pass/fail condition (must be binary-testable, not subjective)"
+      met:
+        type: boolean
+        description: "Was this criterion met in the example?"
+
+  context:
+    type: object
+    required: true
+    fields:
+      input_prompt:
+        type: string
+        description: "The user prompt or task that triggered this skill"
+      skill_loaded:
+        type: string
+        description: "Which skill(s) were active"
+      output_summary:
+        type: string
+        description: "Summary of what the agent produced (keep under 500 chars)"
+
+  reasoning:
+    type: string
+    required: true
+    description: "Why this is a good or bad example — specific, not vague"
+
+  tags:
+    type: list
+    required: false
+    description: "Searchable tags like 'concise', 'over-engineered', 'missing-edge-case'"
+
+  captured_at:
+    type: datetime
+    required: true
+    description: "ISO 8601 timestamp of when this example was captured"
+
+  captured_by:
+    type: enum
+    values: [manual, auto-detected, system]
+    required: true
+    description: "How this example was captured"

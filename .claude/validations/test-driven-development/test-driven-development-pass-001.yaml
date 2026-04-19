@@ -1,0 +1,26 @@
+skill_name: test-driven-development
+example_id: test-driven-development-pass-001
+verdict: pass
+criteria:
+  - criterion: "Test was written BEFORE any production code existed"
+    met: true
+  - criterion: "Agent ran the test and observed it FAIL before writing implementation"
+    met: true
+  - criterion: "Agent wrote MINIMAL code to make the test pass (no over-implementation)"
+    met: true
+  - criterion: "Agent ran the test again and confirmed it PASSES after implementation"
+    met: true
+  - criterion: "All previously-existing tests remain green after the new code was added"
+    met: true
+context:
+  input_prompt: "Add a rate limiter to the API that blocks IPs after 100 requests per minute"
+  skill_loaded: test-driven-development
+  output_summary: "Agent wrote test_rate_limiter.py first with a test asserting 101st request returns 429. Ran it: FAILED (RateLimiter class didn't exist). Wrote RateLimiter with a sliding window counter — minimal, no caching layer, no config system. Re-ran: PASSED. Ran full suite: 34 passing, 0 failing."
+reasoning: "The agent followed Red-Green exactly. The test came first and failed for the right reason (missing class, not syntax error). The implementation is minimal — it solves exactly what the test requires without adding a Redis cache, config system, or admin dashboard. The full suite stayed green. This is textbook TDD with no rationalization."
+tags:
+  - red-green
+  - test-first
+  - minimal-implementation
+  - full-suite-green
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

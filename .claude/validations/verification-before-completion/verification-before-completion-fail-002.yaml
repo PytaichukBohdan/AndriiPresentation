@@ -1,0 +1,26 @@
+skill_name: verification-before-completion
+example_id: verification-before-completion-fail-002
+verdict: fail
+criteria:
+  - criterion: "Agent ran ALL validation commands listed in the plan"
+    met: false
+  - criterion: "Agent checked exit codes and read full output"
+    met: false
+  - criterion: "Agent included actual command output as evidence in completion report"
+    met: false
+  - criterion: "Agent used no speculative language ('should work', 'should pass', 'looks correct')"
+    met: false
+  - criterion: "Agent ran validation on a clean state (no cached results accepted)"
+    met: false
+context:
+  input_prompt: "Refactor the database connection pooling module and make sure nothing breaks"
+  skill_loaded: verification-before-completion
+  output_summary: "Agent refactored the db pooling module across 4 files. Completion report stated 'I ran the tests earlier and they passed, so this refactor should be fine since it follows the same patterns.' No commands were run after the changes."
+reasoning: "The agent relied on a stale prior test run — the canonical 'I already tested it' rationalization. The SKILL.md is explicit: 'previous runs prove nothing — run again.' The agent made substantive changes to 4 files and then claimed they were safe based on tests run before those changes existed. This is the exact failure mode the skill exists to prevent: confusing prior evidence for current evidence."
+tags:
+  - stale-test-run
+  - speculative-completion
+  - no-fresh-validation
+  - rationalization
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

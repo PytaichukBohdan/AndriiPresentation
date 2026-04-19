@@ -1,0 +1,12 @@
+{
+  "session_id": "3ec3a6c7-61fc-49e0-9102-b5fe292c2ed2",
+  "prompts": [
+    " /implement_w_team specs/pipeline-end-to-end-lifecycle.md",
+    "restart proj",
+    "Now - how do I create new backlog? Doesn't seem to have button for it",
+    "I wanna have ui for it - jus have a text input",
+    "commit\\\nNow - i've added new tyicket\\\nIts in backlog\\\nI cannot move it",
+    "nived - its moved. But it should launch the corresponding command, like plan with team, then implement with team, etc., but it doesn't do it.",
+    "No - each stage should trigger corresponding commands from '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/commands'"
+  ]
+}

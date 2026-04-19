@@ -1,0 +1,24 @@
+skill_name: precise-worker
+example_id: precise-worker-fail-001
+verdict: fail
+criteria:
+  - criterion: "Agent delivered ONLY what was explicitly asked — no additional unrequested work"
+    met: false
+  - criterion: "Agent used the requested output format (chat vs file vs specific format)"
+    met: false
+  - criterion: "Agent stayed within the declared scope files/directories without touching adjacent code"
+    met: false
+  - criterion: "Agent signaled completion clearly with a summary of what was delivered"
+    met: true
+context:
+  input_prompt: "Write a spec to specs/auth-refresh.md for the token refresh feature"
+  skill_loaded: precise-worker
+  output_summary: "Agent wrote the spec file, then implemented the token refresh endpoint in src/auth/refresh.py, added tests in tests/auth/test_refresh.py, updated the OpenAPI schema, and wrote a migration file. Delivered all 5 artifacts, noting 'I went ahead and implemented it since the spec was straightforward.'"
+reasoning: "The agent was asked for one deliverable (a spec file) and produced five. It expanded scope by implementing, testing, and migrating — work that was not asked for and may duplicate or conflict with work already planned by the lead. The SKILL.md is explicit: 'Write the spec, then implement it, then test it' is the BAD example. The agent's 'I went ahead' rationale is exactly the improvisation the skill prohibits — the lead sequences work across a team and the agent doesn't have that context."
+tags:
+  - scope-creep
+  - unrequested-implementation
+  - wrong-format
+  - ignored-task-boundary
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

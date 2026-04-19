@@ -1,0 +1,27 @@
+skill_name: taste-frontend
+example_id: taste-frontend-pass-001
+verdict: pass
+criteria:
+  - criterion: "No Inter font used — agent chose Geist, Outfit, Cabinet Grotesk, or Satoshi"
+    met: true
+  - criterion: "Animations use transform/opacity exclusively (no top/left/width/height animation)"
+    met: true
+  - criterion: "Full-height sections use min-h-[100dvh] not h-screen"
+    met: true
+  - criterion: "No 3-column equal-card layout used for feature rows"
+    met: true
+  - criterion: "No emojis in markup or text content"
+    met: true
+context:
+  input_prompt: "Build a SaaS landing page hero section with an animated CTA button"
+  skill_loaded: taste-frontend
+  output_summary: "Agent produced an asymmetric hero with left-aligned text using Satoshi font, min-h-[100dvh], CTA button animating via transform scale(0.98) on active state, Framer Motion entrance via opacity/translateY, Phosphor icons for decorative elements. No emojis, no Inter, no h-screen."
+reasoning: "The agent correctly applied the bias-correction rules. Font choice (Satoshi) avoids the banned Inter. The h-screen bug is avoided with min-h-[100dvh]. The CTA active state uses transform not a color flash. All animations operate on transform/opacity, keeping them on the GPU compositor thread. The asymmetric layout breaks the centered-hero anti-pattern. No 3-column card row appeared."
+tags:
+  - hardware-accelerated-css
+  - correct-font-choice
+  - min-h-dvh
+  - asymmetric-layout
+  - no-emojis
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

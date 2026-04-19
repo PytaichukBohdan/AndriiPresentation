@@ -1,0 +1,53 @@
+architecture:
+  commands_dir: .claude/commands/
+  agents_dir: .claude/agents/team/
+  key_patterns:
+    team_orchestration: TeamCreate -> TaskCreate (one per story) -> Task fan-out (all in one message) -> collect -> TeamDelete
+    story_generation: synchronous general-purpose sub-agent via Task tool, bypassPermissions mode
+    screenshot_path: "{SCREENSHOTS_DIR}/{YYYYMMDD_HHMMSS}_{short-uuid}/{file-stem}/{story-slug}/"
+    spec_writeback: Edit tool to update "## Post-Implementation Record > ### Integration Testing" section
+
+patterns_discovered:
+  - date: "2026-04-14"
+    note: "ui-review.md is the canonical reference for TeamCreate/fan-out/browser-validator patterns"
+  - date: "2026-04-14"
+    note: "implement_w_team.md provides the Iron Law, Red Flags, Announcement, and Standard section styles"
+  - date: "2026-04-14"
+    note: "Story generation prompt must be passed verbatim to sub-agent — includes YAML schema, step verb vocabulary, quality rules, coverage list"
+  - date: "2026-04-14"
+    note: "browser-validator agent is read-only (disallowedTools: Write, Edit) — uses browser-use + drive skills"
+  - date: "2026-04-14"
+    note: "RUN_DIR generated once at start of Phase 5 via uuidgen | head -c 6"
+
+observations:
+  - date: "2026-04-14"
+    note: "integration_testing command created at .claude/commands/integration_testing.md, 553 lines"
+  - date: "2026-04-14"
+    note: "testing command created at .claude/commands/testing.md, 464 lines. Scoped to fast server-independent tests (lint+typecheck+unit+component). Writes to SESSION_DIR/testing_results/report.md and updates spec's Post-Implementation Record > Testing section."
+
+open_questions:
+  - "feedback_detector hook prints to stderr (informational only, no blocking) — confirm this is the intended UX"
+
+hooks_system:
+  pattern: "standalone scripts with shebang #!/usr/bin/env -S uv run --script + inline deps block"
+  stdin_json_field: "prompt - confirmed from user_prompt_submit.py line 174"
+  utils_import_pattern: "sys.path.insert(0, str(Path(__file__).parent / 'utils')) then direct import"
+  settings_wiring: "hooks nested inside UserPromptSubmit[0].hooks array — not at top level"
+  feedback_detector:
+    files:
+      - .claude/hooks/feedback_detector.py
+      - .claude/hooks/utils/feedback_keywords.py
+    wired_in: settings.json UserPromptSubmit hooks array
+    behavior: "prints to stderr when positive/negative feedback detected, exits 0 always"
+
+validations_system:
+  root: .claude/validations/
+  schema: .claude/validations/_schema.yaml
+  convention: "<skill-name>/<example_id>.yaml where example_id = <skill>-<pass|fail>-<NNN>"
+  seed_examples_created:
+    - verification-before-completion/verification-before-completion-pass-001.yaml
+    - verification-before-completion/verification-before-completion-fail-001.yaml
+  notes:
+    - "verdict is strictly binary — pass or fail, no partial"
+    - "criteria items are list of {criterion: string, met: bool} pairs"
+    - "captured_by enum: manual | auto-detected | system"

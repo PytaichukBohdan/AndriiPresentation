@@ -1,0 +1,8 @@
+{
+  "session_id": "031c635f-3d15-41d7-b664-cf98a1decf5f",
+  "prompts": [
+    "/plan_w_team I LOVE my settings of '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude' AND new claude feature of /loop\\\n\\\nBUT \\\nI am technical and I write code, but I want another person, non-technical, to still use it. The problem is they won't be using commands, so I need you to decide when to use commands, when to provide questions, when to provide assets, etc. It should be adopted, for example, for a marketer. Can you propose to me an approach in order to do it, with the most relevant commands? I would love a plan with the team to implement, with the team, and to brainstorm with the team. Also, the usage of the browser, the ability to create skills, and to leverage the built-in loop functionality. For a marketer, I just want him to say this stuff to use it as is, but you will be deciding to use commands and all of that by yourself, so which is your experience that you propose?",
+    "So I would be able just to provide the.cloud and everything would work.",
+    "Okay, update the thing that we plan with the team when we have zero to low questions, and then implement. We brainstorm with the team when we need a feature to be specified, and then we implement with the team based on the specification that we've created. Ensure that you load the specification correctly.\\\n\\\nAlso think about context and maybe session routing, because the person would be speaking a lot to Claude Code, and maybe we need a trick to keep the memory loaded correctly."
+  ]
+}

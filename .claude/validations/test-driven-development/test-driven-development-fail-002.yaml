@@ -1,0 +1,27 @@
+skill_name: test-driven-development
+example_id: test-driven-development-fail-002
+verdict: fail
+criteria:
+  - criterion: "Test was written BEFORE any production code existed"
+    met: false
+  - criterion: "Agent ran the test and observed it FAIL before writing implementation"
+    met: false
+  - criterion: "Agent wrote MINIMAL code to make the test pass (no over-implementation)"
+    met: false
+  - criterion: "Agent ran the test again and confirmed it PASSES after implementation"
+    met: false
+  - criterion: "All previously-existing tests remain green after the new code was added"
+    met: false
+context:
+  input_prompt: "Fix the bug where order totals include tax for tax-exempt customers"
+  skill_loaded: test-driven-development
+  output_summary: "Agent found the bug in order.py line 42, patched the tax calculation conditional, then said 'I'll add a test later — the fix is too simple to need TDD here. I manually verified it works for the test customer account in staging.'"
+reasoning: "The agent explicitly invoked two of the SKILL.md's listed rationalizations: 'Too simple to test' and 'Already manually tested.' Both are explicitly called out as red flags that require stopping and restarting with TDD. No failing test was written, no regression guard exists, the fix has no automated verification, and 'manually verified in staging' cannot be replayed. The next change to order.py has no protection against re-introducing this bug."
+tags:
+  - no-test-at-all
+  - too-simple-rationalization
+  - manual-testing-excuse
+  - no-regression-guard
+  - rationalization
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

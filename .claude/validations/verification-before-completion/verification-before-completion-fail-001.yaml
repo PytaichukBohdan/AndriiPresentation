@@ -1,0 +1,26 @@
+skill_name: verification-before-completion
+example_id: verification-before-completion-fail-001
+verdict: fail
+criteria:
+  - criterion: "Agent ran ALL validation commands listed in the plan"
+    met: false
+  - criterion: "Agent checked exit codes and read full output"
+    met: false
+  - criterion: "Agent included actual command output as evidence in completion report"
+    met: false
+  - criterion: "Agent used no speculative language ('should work', 'should pass', 'looks correct')"
+    met: false
+  - criterion: "Agent ran validation on a clean state (no cached results accepted)"
+    met: false
+context:
+  input_prompt: "Add input validation to the payment processing endpoint and make sure nothing breaks"
+  skill_loaded: verification-before-completion
+  output_summary: "Agent modified the payment endpoint and wrote new unit tests. Completion report stated 'the tests should pass since the logic mirrors the existing pattern' — no test commands were run. Agent marked task complete without executing any validation."
+reasoning: "The agent skipped every verification step. It relied on pattern-matching intuition ('mirrors the existing pattern') instead of running the test suite. The completion report contained zero actual command output. The phrase 'should pass' is the canonical failure signal — it signals the agent reasoned about correctness without measuring it. This pattern is especially dangerous in payment-critical paths where silent regressions have real consequences."
+tags:
+  - speculative-completion
+  - no-evidence
+  - skipped-validation
+  - high-risk-domain
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

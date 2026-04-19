@@ -1,0 +1,26 @@
+skill_name: verification-before-completion
+example_id: verification-before-completion-pass-001
+verdict: pass
+criteria:
+  - criterion: "Agent ran ALL validation commands listed in the plan"
+    met: true
+  - criterion: "Agent checked exit codes and read full output"
+    met: true
+  - criterion: "Agent included actual command output as evidence in completion report"
+    met: true
+  - criterion: "Agent used no speculative language ('should work', 'should pass', 'looks correct')"
+    met: true
+  - criterion: "Agent ran validation on a clean state (no cached results accepted)"
+    met: true
+context:
+  input_prompt: "Implement the user authentication module and verify it works"
+  skill_loaded: verification-before-completion
+  output_summary: "Agent implemented auth module, ran `uv run pytest tests/auth/ -v` producing 12/12 pass, ran `uv run mypy src/auth/` with exit 0, and pasted the final pytest summary block verbatim into the completion report."
+reasoning: "The agent followed the verification protocol without shortcuts. It ran pytest fresh (not from memory of a previous run), read the exit code (0), read the full output, and included the test summary as inline evidence. The completion report contained actual output lines, not a paraphrase. No hedging language appeared."
+tags:
+  - evidence-based
+  - thorough
+  - exit-code-checked
+  - output-quoted
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

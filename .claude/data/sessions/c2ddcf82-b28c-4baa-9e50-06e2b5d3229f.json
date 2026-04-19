@@ -1,0 +1,7 @@
+{
+  "session_id": "c2ddcf82-b28c-4baa-9e50-06e2b5d3229f",
+  "prompts": [
+    "checkout main",
+    " We're modifying '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/commands/ui-review.md' . Okay, current behavior: we discover the stories from YAML files and then we execute tests. New behavior: I want you to be provided with either a specification or a text description, or to ask to look at the current git diff. Based on that, you should use a separate sub-agent to generate User Stories YAML and generate them into a subfolder based on date and session name. Then use those stories to perform exactly what is written right now to fan out parallel Bowser QA agent instances to validate each story."
+  ]
+}

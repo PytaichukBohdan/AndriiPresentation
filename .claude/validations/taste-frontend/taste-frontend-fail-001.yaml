@@ -1,0 +1,28 @@
+skill_name: taste-frontend
+example_id: taste-frontend-fail-001
+verdict: fail
+criteria:
+  - criterion: "No Inter font used — agent chose Geist, Outfit, Cabinet Grotesk, or Satoshi"
+    met: false
+  - criterion: "Animations use transform/opacity exclusively (no top/left/width/height animation)"
+    met: false
+  - criterion: "Full-height sections use min-h-[100dvh] not h-screen"
+    met: false
+  - criterion: "No 3-column equal-card layout used for feature rows"
+    met: false
+  - criterion: "No emojis in markup or text content"
+    met: false
+context:
+  input_prompt: "Create a features section for a productivity app landing page"
+  skill_loaded: taste-frontend
+  output_summary: "Agent produced a centered hero with h-screen, font-family Inter, three equal-width cards in a flex row with identical padding, animated card hover via CSS 'top: -4px', and emoji icons (rocket, sparkles, chart) as visual decorators."
+reasoning: "Every major AI-tell fired simultaneously. Inter font is explicitly banned. h-screen causes mobile layout jumps on iOS Safari. The 3-column equal card layout is the exact 'generic feature row' the skill prohibits. Animating 'top' triggers layout reflow on every frame instead of using transform, causing jank. Emojis are banned by the ANTI-EMOJI POLICY marked CRITICAL in the skill. This output is a catalog of the patterns the skill exists to prevent."
+tags:
+  - inter-font-banned
+  - h-screen-bug
+  - three-column-cards
+  - layout-animation
+  - emojis-in-markup
+  - multiple-ai-tells
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

@@ -1,0 +1,26 @@
+skill_name: systematic-debugging
+example_id: systematic-debugging-pass-001
+verdict: pass
+criteria:
+  - criterion: "Agent reproduced the bug consistently before attempting any fix"
+    met: true
+  - criterion: "Agent identified the minimal reproduction case (isolated the root cause location)"
+    met: true
+  - criterion: "Agent wrote an explicit hypothesis ('The bug occurs because...') before touching code"
+    met: true
+  - criterion: "Agent made ONE focused change that addressed the root cause (not a symptom)"
+    met: true
+  - criterion: "Agent can explain why the fix works after applying it"
+    met: true
+context:
+  input_prompt: "Users report that the CSV export crashes when the dataset has more than 10,000 rows"
+  skill_loaded: systematic-debugging
+  output_summary: "Agent reproduced the crash with a 10,001-row fixture. Isolated to csv_writer.py line 87 via binary bisect. Hypothesis: 'StringIO buffer is flushed to memory and exceeds the 32MB default limit at ~10k rows.' Fixed by switching to chunked streaming writes. Added regression test that writes 15k rows and verifies no exception. All 47 existing tests pass."
+reasoning: "The agent followed every step of the systematic debugging flow. It reproduced the bug with a specific fixture, narrowed it to a single line, wrote a falsifiable hypothesis before changing any code, made one minimal change (streaming writes), and validated the fix with a regression test. The fix addresses the actual root cause (memory limit) rather than a symptom (e.g., adding a try/catch)."
+tags:
+  - root-cause-identified
+  - hypothesis-first
+  - minimal-change
+  - regression-test-added
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

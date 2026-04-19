@@ -1,0 +1,10 @@
+{
+  "session_id": "83e81dd2-2dad-47e1-8ebb-819978177a1b",
+  "prompts": [
+    "Whenever you '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/commands/plan_w_team.md' or '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/commands/brainstorm_w_team.md' - ENSURE THAT YOU USE '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/agents/scout-report-suggest.md' (3) and '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/agents/scout-report-suggest.md' (5) as a team (by mirroring the way we do '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/commands/implement_w_team.md' with '/Users/bohdanpytaichuk/Documents/4ra/coding-agents-settings/.claude/agents/team')\\\nSo we research we research the codebase at the parallel team members from different angles, and you set them to research the repo to satisfy the task from different angles.",
+    "BOTH COMMANDS SHOULD HAVE scout-report-suggest - 3 agents; and scout-report-suggest-fast - 5 agents",
+    "YOU FRAME WHAT SUBAGENT WILL DO WHAT!!!! LLM (YOU) SHOULD DETERMINE BASED ON THE TASK TO GIVE TO scouts GUVEN BY USER. It should be fluid",
+    "commit * push",
+    "Push to PytaichukBohdan github (https://github.com/PytaichukBohdan/coding-agents-settings/tree/main) - so its relevant"
+  ]
+}

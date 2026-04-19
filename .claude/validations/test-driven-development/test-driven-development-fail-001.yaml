@@ -1,0 +1,27 @@
+skill_name: test-driven-development
+example_id: test-driven-development-fail-001
+verdict: fail
+criteria:
+  - criterion: "Test was written BEFORE any production code existed"
+    met: false
+  - criterion: "Agent ran the test and observed it FAIL before writing implementation"
+    met: false
+  - criterion: "Agent wrote MINIMAL code to make the test pass (no over-implementation)"
+    met: false
+  - criterion: "Agent ran the test again and confirmed it PASSES after implementation"
+    met: true
+  - criterion: "All previously-existing tests remain green after the new code was added"
+    met: true
+context:
+  input_prompt: "Implement a discount calculator for the checkout module"
+  skill_loaded: test-driven-development
+  output_summary: "Agent built the full discount_calculator.py with 6 discount strategies, a plugin registry, and a configuration loader. Then wrote 6 tests that matched the implementation. All tests passed on first run. Agent said 'I've implemented the calculator and written tests to verify each strategy.'"
+reasoning: "The agent wrote code first, then retrofitted tests to match what was already built. The proof: all 6 tests passed immediately on first run. Tests written after implementation are documentation, not verification — they cannot catch the bugs introduced during writing because they were designed to pass the code that already exists. The agent also over-implemented (6 strategies + plugin registry + config loader) when only a discount calculator was asked for. TDD requires the test to fail first — it never did."
+tags:
+  - code-first
+  - tests-as-afterthought
+  - tests-passed-immediately
+  - over-implementation
+  - no-red-phase
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

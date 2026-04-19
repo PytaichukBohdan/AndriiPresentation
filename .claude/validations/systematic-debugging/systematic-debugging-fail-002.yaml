@@ -1,0 +1,27 @@
+skill_name: systematic-debugging
+example_id: systematic-debugging-fail-002
+verdict: fail
+criteria:
+  - criterion: "Agent reproduced the bug consistently before attempting any fix"
+    met: true
+  - criterion: "Agent identified the minimal reproduction case (isolated the root cause location)"
+    met: false
+  - criterion: "Agent wrote an explicit hypothesis ('The bug occurs because...') before touching code"
+    met: false
+  - criterion: "Agent made ONE focused change that addressed the root cause (not a symptom)"
+    met: false
+  - criterion: "Agent can explain why the fix works after applying it"
+    met: false
+context:
+  input_prompt: "Intermittent KeyError in the data pipeline when processing user records overnight"
+  skill_loaded: systematic-debugging
+  output_summary: "Agent confirmed the KeyError by running the pipeline locally. Then searched Stack Overflow and found a pattern for safely accessing dict keys. Replaced all dict['key'] accesses across 12 files with dict.get('key') calls. Stated 'This should prevent KeyErrors going forward.'"
+reasoning: "Agent reproduced the bug but then jumped straight from REPRODUCE to a copied pattern fix, skipping ISOLATE and UNDERSTAND entirely. Using dict.get() silently swallows missing keys, converting a crash into a silent wrong result — which violates the project's no-fallback-values rule and is worse than the original bug. The fix is applied cargo-cult-style across 12 files with no understanding of which key was missing or why it was missing in the first place."
+tags:
+  - copy-paste-fix
+  - skipped-isolate
+  - skipped-understand
+  - silent-wrong-result
+  - scope-explosion
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system

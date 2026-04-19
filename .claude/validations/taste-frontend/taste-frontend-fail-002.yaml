@@ -1,0 +1,26 @@
+skill_name: taste-frontend
+example_id: taste-frontend-fail-002
+verdict: fail
+criteria:
+  - criterion: "No Inter font used — agent chose Geist, Outfit, Cabinet Grotesk, or Satoshi"
+    met: true
+  - criterion: "Animations use transform/opacity exclusively (no top/left/width/height animation)"
+    met: true
+  - criterion: "Full-height sections use min-h-[100dvh] not h-screen"
+    met: true
+  - criterion: "No 3-column equal-card layout used for feature rows"
+    met: true
+  - criterion: "No emojis in markup or text content"
+    met: false
+context:
+  input_prompt: "Build an analytics dashboard with KPI cards for a B2B SaaS product"
+  skill_loaded: taste-frontend
+  output_summary: "Agent used Geist font, correct animations, and min-h-[100dvh]. However, KPI cards displayed emoji icons (fire for 'hot metric', up-arrow emoji for growth), placeholder names 'John Doe' and 'Sarah Chan' appeared in recent activity, and metric values showed '99.99%' and '50%' uptime — predictably round fake numbers."
+reasoning: "The typography and CSS mechanics are correct, but three Content & Data AI-tells fired. Emojis violate the CRITICAL ANTI-EMOJI POLICY. 'John Doe' and 'Sarah Chan' are explicitly listed as banned generic names. '99.99%' and '50%' are called out as 'predictable outputs' to avoid — the skill requires organic, messy data like '47.2%'. The dashboard passes on mechanics but fails on content quality, which the skill equally governs."
+tags:
+  - emojis-in-markup
+  - generic-names-banned
+  - fake-round-numbers
+  - content-ai-tells
+captured_at: "2026-04-14T12:00:00Z"
+captured_by: system
