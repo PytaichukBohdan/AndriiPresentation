@@ -72,3 +72,21 @@ public/
 ## No fallback policy
 
 Отсутствие обязательного поля → crash с понятным сообщением. Никаких silent defaults.
+
+## Deploy (Hetzner)
+
+Live: **http://159.69.191.148/** — `boys-trip-2026` (cax11, fsn1-dc14, id 127431167).
+
+Redeploy after code changes:
+
+```bash
+./scripts/deploy.sh          # pnpm build + rsync to /var/www/boys-trip + nginx reload
+```
+
+Manual equivalent:
+
+```bash
+pnpm run build
+rsync -az --delete -e "ssh -i ~/.ssh/id_ed25519" dist/ root@159.69.191.148:/var/www/boys-trip/
+ssh -i ~/.ssh/id_ed25519 root@159.69.191.148 'systemctl reload nginx'
+```
