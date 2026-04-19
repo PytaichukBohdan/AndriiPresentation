@@ -6,4 +6,5 @@ export interface Boy {
   vibe: string[];
   affinities: string[];
   description: string;
+  includeInPicker: boolean;
 }

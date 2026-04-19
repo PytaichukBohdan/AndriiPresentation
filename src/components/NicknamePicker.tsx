@@ -12,7 +12,7 @@ export default function NicknamePicker() {
         className="bg-chalk text-void font-mono text-mono-sm font-bold uppercase px-3 py-2 border-hard-sm border-void shadow-[6px_6px_0_0_#000] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-[transform,box-shadow] cursor-pointer"
       >
         <option value="">ВЫБЕРИ СЕБЯ</option>
-        {BOYS.map((b) => (
+        {BOYS.filter((b) => b.includeInPicker).map((b) => (
           <option key={b.id} value={b.nickname}>
             {b.nickname}
           </option>
